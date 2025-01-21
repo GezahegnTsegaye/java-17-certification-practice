@@ -10,30 +10,30 @@ import org.junit.jupiter.api.Test;
 class ChapterOneUnitTest {
 
     private static final Predicate<String> REGEX_LEADING_WHITESPACE = Pattern.compile("\\s+.*")
-        .asMatchPredicate();
+            .asMatchPredicate();
     private static final Predicate<String> REGEX_TRAILING_WHITESPACE = Pattern.compile(".*\\s+")
-        .asMatchPredicate();
+            .asMatchPredicate();
     private static final String LINEBREAK_MATCHER = "\\R";
 
     @Test
     void verifyTextBlock() {
         var textBlock = """
-            squirrel \s
-            pigeon \
-            termite""";
+                squirrel \s
+                pigeon \
+                termite""";
         var textBlock2 = """
-            squirrel
-              pigeon
-            termite
-            """;
+                squirrel
+                  pigeon
+                termite
+                """;
 
         assertThat(textBlock).hasLineCount(2);
         assertThat(textBlock.split(LINEBREAK_MATCHER)).anyMatch(REGEX_TRAILING_WHITESPACE)
-            .noneMatch(REGEX_LEADING_WHITESPACE);
+                .noneMatch(REGEX_LEADING_WHITESPACE);
 
         assertThat(textBlock2).hasLineCount(3);
         assertThat(textBlock2.split(LINEBREAK_MATCHER)).anyMatch(REGEX_LEADING_WHITESPACE)
-            .noneMatch(REGEX_TRAILING_WHITESPACE);
+                .noneMatch(REGEX_TRAILING_WHITESPACE);
     }
 
     @Test
